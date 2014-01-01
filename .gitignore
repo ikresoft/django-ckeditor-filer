@@ -1,4 +1,8 @@
-*.log
-*.pot
 *.pyc
+dev.db
 local_settings.py
+build/
+src/
+pip-log.txt
+*DS_Store
+*.egg-info

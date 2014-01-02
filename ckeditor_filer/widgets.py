@@ -43,7 +43,6 @@ class CKEditorWidget(forms.Textarea):
         try:
             js = (
                 settings.STATIC_URL + 'ckeditor_filer/ckeditor/ckeditor.js',
-                #settings.STATIC_URL + 'simple_cms/js/jquery.watch.js',
                 filer_settings.FILER_STATICMEDIA_PREFIX + 'js/popup_handling.js',
             )
         except AttributeError:
@@ -84,8 +83,6 @@ class CKEditorWidget(forms.Textarea):
         if value is None:
             value = ''
         final_attrs = self.build_attrs(attrs, name=name)
-        #self.config.setdefault('filebrowserUploadUrl', reverse('ckeditor_upload'))
-        self.config.setdefault('filebrowserBrowseUrl', reverse('admin:filer_folder_changelist') + '?_popup')
         return mark_safe(render_to_string('ckeditor_filer/widget.html', {
             'final_attrs': flatatt(final_attrs),
             'value': conditional_escape(force_text(value)),

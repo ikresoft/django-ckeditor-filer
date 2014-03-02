@@ -1,0 +1,5 @@
+include README.md
+include MANIFEST.in
+recursive-include ckeditor_filer/templates *
+recursive-include ckeditor_filer/static *
+recursive-include ckeditor_filer/locale *

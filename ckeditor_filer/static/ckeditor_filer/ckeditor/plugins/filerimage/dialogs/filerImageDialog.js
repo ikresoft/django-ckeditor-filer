@@ -2,7 +2,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
     dialog = CKEDITOR.dialog.getCurrent();
     var imageWidth = 0;
     var imageHeight = 0;
-    
+
     function getImageUrl() {
         var url = dialog.getContentElement("tab-basic", "url");
         var thumb_opt_id = "";
@@ -34,7 +34,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
             // document = CKEDITOR.dom.document
             var id_image = document.getById( 'id_image' );
             var oldVal = id_image.getValue();
-            
+
             setInterval(function () {
                 if (oldVal != id_image.getValue()) {
                     oldVal = id_image.getValue();
@@ -44,7 +44,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
             if ( id_image )
                 id_image.hide();
             var id_image_clear = document.getById( 'id_image_clear' );
-            
+
             id_image_clear.on('click', function () {
                 id_image.setValue("");
                 id_image.removeAttribute("value");
@@ -76,7 +76,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
             else
                 this.insertMode = false;
 
-            // Store the reference to the <abbr> element in an internal property, for later use.
+            // Store the reference to the <img> element in an internal property, for later use.
             this.element = element;
 
             // Invoke the setup methods of all dialog elements, so they can load the element attributes.
@@ -87,20 +87,25 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
         },
         // This method is invoked once a user clicks the OK button, confirming the dialog.
         onOk: function() {
-
             // The context of this function is the dialog object itself.
             // http://docs.ckeditor.com/#!/api/CKEDITOR.dialog
             var dialog = this;
 
-            // Creates a new <abbr> element.
-            var abbr = this.element;
+            // Creates a new <img> element.
+            var img = this.element;
 
-            // Invoke the commit methods of all dialog elements, so the <abbr> element gets modified.
-            this.commitContent( abbr );
+            dialog = CKEDITOR.dialog.getCurrent();
+            var document = this.getElement().getDocument();
+            // document = CKEDITOR.dom.document
+            var id_image = document.getById( 'id_image' );
+            img.setAttribute("filer_id", id_image.getValue());
+
+            // Invoke the commit methods of all dialog elements, so the <img> element gets modified.
+            this.commitContent( img );
 
             // Finally, in if insert mode, inserts the element at the editor caret position.
             if ( this.insertMode )
-                editor.insertElement( abbr );
+                editor.insertElement( img );
         },
 
         contents: [
@@ -194,7 +199,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
                                         error:function (xhr, ajaxOptions, thrownError){
                                             alert(xhr.status);
                                             alert(thrownError);
-                                        } 
+                                        }
                                     });
                                 },
                                 onChange: function() {
@@ -223,7 +228,7 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
                                         ratio = this.getValue() / imageWidth;   // get ratio for scaling image
                                         dialog.getContentElement("tab-basic", "height").setValue(Math.ceil(imageHeight * ratio));
                                     }
-                                    
+
                                     //getImageUrl();
                                 },
                                 setup: function( element ) {
@@ -286,9 +291,27 @@ CKEDITOR.dialog.add( 'filerImageDialog', function ( editor ) {
                         }
                     },
                     {
-                        type: 'checkbox',
-                        id: 'target_blank',
-                        label: 'Target blank',                       
+                        type: 'hbox',
+                        widths: [ '33%', '33%', '33%' ],
+                        children: [
+                            {
+                                type: 'checkbox',
+                                id: 'target_blank',
+                                label: 'Target blank',
+                            },
+                            {
+                                type: 'checkbox',
+                                id: 'front_image',
+                                label: 'Front image',
+                                setup: function( element ) {
+                                    this.setValue( element.getAttribute( "front_image" ) );
+                                },
+                                // Called by the main commitContent call on dialog confirmation.
+                                commit: function( element ) {
+                                    element.setAttribute( "front_image", this.getValue() );
+                                }
+                            }
+                        ]
                     },
                 ]
             },

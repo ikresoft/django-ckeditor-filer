@@ -19,7 +19,7 @@ DEFAULT_CONFIG = {
         ['Source', '-', 'Bold', 'Italic']
     ],
     'toolbar_Full': [
-        ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+        ['Paragraph', 'Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
         ['Filer Image', 'Table', 'HorizontalRule'],
         ['TextColor', 'BGColor'],
         ['Smiley', 'SpecialChar'], ['Source'],

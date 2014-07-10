@@ -8,14 +8,14 @@
             var url = dialog.getContentElement("tab-basic", "url");
             var thumb_opt_id = "";
             thumb_sel_val = dialog.getContentElement("tab-basic", "thumbnail_option").getValue();
-            if (thumb_sel_val !== 0) {
+            if (thumb_sel_val != 0) {
                 thumb_opt_id = thumb_sel_val + '/';
                 server_url = '/ckeditor_filer/url_image/'+ $('#id_image').val() + '/' + thumb_opt_id;
             } else {
                 width = dialog.getContentElement("tab-basic", "width").getValue();
-                if (width === "") width = ''; else width += '/';
+                if (width == "") width = ''; else width += '/';
                 height = dialog.getContentElement("tab-basic", "height").getValue();
-                if (height === "") height = ''; else height += '/';
+                if (height == "") height = ''; else height += '/';
                 server_url = '/ckeditor_filer/url_image/'+ $('#id_image').val() + '/' + width + height;
             }
             $.get(server_url, function(data) {
@@ -225,7 +225,7 @@
                                     id: 'width',
                                     label: 'Width',
                                     onChange: function () {
-                                        if (this.getValue() !== "") {
+                                        if (this.getValue() != "") {
                                             ratio = this.getValue() / imageWidth;   // get ratio for scaling image
                                             dialog.getContentElement("tab-basic", "height").setValue(Math.ceil(imageHeight * ratio));
                                         }

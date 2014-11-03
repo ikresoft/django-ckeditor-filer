@@ -324,6 +324,12 @@
                             type: 'text',
                             id: 'css_style',
                             label: 'CSS',
+                            setup: function( element ) {
+                                this.setValue( element.getAttribute( "class" ) );
+                            },                            
+                            commit: function( element ) {
+                                element.setAttribute( "class", this.getValue() );
+                            }                              
                         },
                     ]
                 }

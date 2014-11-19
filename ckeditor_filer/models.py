@@ -11,13 +11,13 @@ class ThumbnailOption(models.Model):
     height = models.IntegerField(_("height"), help_text=_('height in pixel.'))
     crop = models.BooleanField(_("crop"), default=True)
     upscale = models.BooleanField(_("upscale"), default=True)
-    
+
     class Meta:
-        app_label = "filer"
+        app_label = "ckeditor_filer"
         ordering = ('width', 'height')
         verbose_name = _("thumbnail option")
         verbose_name_plural = _("thumbnail options")
-        
+
     def __unicode__(self):
         return u'%s -- %s x %s' %(self.name, self.width, self.height)
 

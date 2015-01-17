@@ -1,5 +1,6 @@
 from django import forms
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.utils.translation import get_language
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
@@ -30,6 +31,7 @@ DEFAULT_CONFIG = {
     'extraPlugins': 'filerimage,youtube,wpmore',
     'removePlugins': 'image',
     'width': 835,
+    'admin_url': '%s' % reverse('admin:index'),
     #'filebrowserWindowWidth': 940,
     #'filebrowserWindowHeight': 725,
 }
@@ -84,6 +86,7 @@ class CKEditorWidget(forms.Textarea):
         if value is None:
             value = ''
         final_attrs = self.build_attrs(attrs, name=name)
+        self.config.setdefault('filebrowserBrowseUrl', "%s?_popup=1" % reverse('url-browser'))
         if not self.config.get('language'):
             self.config['language'] = get_language()
 

@@ -121,7 +121,7 @@
                                     '<label for="id_image">Image:</label>' +
                                     '<img alt="no file selected" class="quiet" src="/static/filer/icons/nofile_48x48.png" id="id_image_thumbnail_img">' +
                                     '&nbsp;<span id="id_image_description_txt"></span>' +
-                                    '<a onclick="return showRelatedObjectLookupPopup(this);" title="Pretraži" id="lookup_id_image" class="related-lookup" href="/admin/filer/folder/last/?t=file_ptr">' +
+                                    '<a onclick="return showRelatedObjectLookupPopup(this);" title="Pretraži" id="lookup_id_image" class="related-lookup" href="' + editor.config.admin_url +'filer/folder/last/?t=file_ptr">' +
                                         '<img width="16" height="16" alt="Pretraži" src="/static/admin/img/icon_searchbox.png">' +
                                     '</a>' +
                                     '<img width="10" height="10" style="display: none;" title="Očisti" alt="Očisti" src="/static/admin/img/icon_deletelink.gif" id="id_image_clear">' +
